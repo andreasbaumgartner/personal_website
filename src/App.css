@@ -62,8 +62,8 @@ button {
   border: 0;
   background-color: transparent;
 }
-
-input: focus, textarea:focus, select:focus {
+/* Before with input: */
+input focus, textarea:focus, select:focus {
   outline: none;
 }
 
