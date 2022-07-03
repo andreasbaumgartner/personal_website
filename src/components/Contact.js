@@ -22,8 +22,24 @@ export const Contact = () => {
   };
 
   const handleSubmit = () => {
-    
-  }
+    e.preventDefault();
+    setButtonText('Sendeing...')
+    let response = await fetch("http://loaclhost:5000/contact", {
+        method: POST,
+        headers: {
+            "Content-Type": "Application/json;charset=utf-8",
+        },
+        body: JSON.stringify(formDetails),
+    });
+    setButtonText("Send");
+    let result = response.json();
+    setFormDetails(formInitialDetails);
+    if (result.code === 200) {
+        setStatus({ success: true, message: 'Message send successfully'});
+    } else {
+        setStatus({ success: false, message: 'Something went wrong, please try again later'})
+    }
+  };
 
 
   return (
@@ -35,7 +51,7 @@ export const Contact = () => {
           </Col>
           <Col md={6}>
             <h2>Get In Touch</h2>
-            <form onSubmit={handleSubmit}>
+            <form>
               <Row>
                 <Col sm={6} className="px-1">
                   <input
